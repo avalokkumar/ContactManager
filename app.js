@@ -1,16 +1,13 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
 
+var mongojs = require('mongojs');
 var app = express();
 
+var db = mongojs('contactlist', ['contactlist']);
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -27,9 +24,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
 app.get('/users', user.list);
+
+app.get('/contactlist', function(req, res){
+	console.log('Received a GET request!');
+	db.contactlist.find(function(err, docs){
+		console.log(docs);
+		res.json(docs);
+	})
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
