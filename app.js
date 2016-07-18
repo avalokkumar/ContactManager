@@ -6,6 +6,7 @@ var express = require('express')
 
 var mongojs = require('mongojs');
 var app = express();
+var bodyParser = require('body-parser');
 
 var db = mongojs('contactlist', ['contactlist']);
 // all environments
@@ -18,6 +19,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 
 // development only
 if ('development' == app.get('env')) {
@@ -32,6 +34,13 @@ app.get('/contactlist', function(req, res){
 		console.log(docs);
 		res.json(docs);
 	})
+});
+
+app.post('/contactlist', function(req, res){
+	console.log(req.body);
+	db.contactlist.insert(req.body, function(err, doc) {
+		res.json(doc);
+	});
 });
 
 http.createServer(app).listen(app.get('port'), function(){
