@@ -3,6 +3,13 @@ var myApp = angular.module('myApp', []);
 myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
 	    console.log("Hello World from controller");
 	  
+       $scope.headerUrl = "../images/header.png";
+    
+        $scope.headerStyle = {
+            "background-color": "coral",
+            "width": "100%",
+            "height": "auto"
+        }
 	   var refresh = function(){
 		   $http.get("/contactlist")
 		   		.success(function(response){
