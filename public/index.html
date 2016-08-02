@@ -26,9 +26,9 @@
 					<td><input class="form-control" ng-model="contact.name" placeholder="Name..."></td>
 					<td><input class="form-control" ng-model="contact.email" placeholder="Email..."></td>
 					<td><input class="form-control" ng-model="contact.number" placeholder="Number..."></td>
-					<td><input class="btn btn-primary" ng-click="addContact()" value="Add"></td>
-					<td><input class="btn btn-primary" ng-click="updateContact(contact._id)" value="Update">
-						<input class="btn btn-primary" ng-click="resetContact()" value="Reset">
+					<td><button class="btn btn-primary" ng-click="addContact()">Add</button></td>
+					<td><button class="btn btn-primary" ng-click="updateContact(contact._id)" >Update</button>
+						<button class="btn btn-primary" ng-click="resetContact()">Reset</button>
 					</td>
 				</tr>
 				<tr ng-repeat="contact in contactList">
